@@ -20,12 +20,12 @@ python manage.py runserver
 ```
 
 A aplicação deverá estar disponivel em seu navegador no endereço: http://localhost:8000/
-![Image not found](.imagens/swagger.png)
+![Image not found](./imagens/swagger.png)
 
 
 # Autenticação
 
-A altenticação e feita através do Simple-JWT.
+A autenticação e feita através do Simple-JWT.
 
 
 
