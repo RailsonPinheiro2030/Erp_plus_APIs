@@ -9,15 +9,16 @@ from root_module.permissions import HasModulePermission
 from root_module.models import Module, RiskClass
 from .serializers import StockSerializer, RiskClassSerializer, HistorySerializer
 from .models import Stock
-from simple_history.utils import update_change_reason
 from rest_framework import status
 from datetime import datetime
+from rest_framework.permissions import IsAuthenticated
 
  
 class StockView(generics.ListAPIView):
     module_name = Module.STOCK_MANAGEMENT
     authentication_classes = [JWTAuthentication]
     permission_classes = [HasModulePermission]
+    permission_classes = [IsAuthenticated]
     
     def get(self, request, *args, **kwargs):
         class_data = RiskClass.objects.all()
@@ -42,6 +43,7 @@ class History(APIView):
     module_name = Module.STOCK_MANAGEMENT
     authentication_classes = [JWTAuthentication]
     permission_classes = [HasModulePermission]
+    permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         stock_history = Stock.objects.filter(company_id=request.user.company.id)
         serializer = HistorySerializer(stock_history, many=True)
@@ -59,6 +61,7 @@ class StockViewAnalitics(APIView):
     module_name = Module.STOCK_MANAGEMENT
     authentication_classes = [JWTAuthentication]
     permission_classes = [HasModulePermission]
+    permission_classes = [IsAuthenticated]
     queryset = Stock.objects.all()
     serializer_class = StockSerializer    
     def patch(self, request, *args, **kwargs):
